@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>胰岛素抵抗机制</title>
+  <script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+    mermaid.initialize({
+      startOnLoad: true,
+      themeVariables: {
+        fontFamily: '"PingFang SC", "Helvetica Neue", Helvetica, Arial, sans-serif',
+        fontSize: '20px'
+      }
+    });
+  </script>
+  <style>
+    body {
+      font-family: "PingFang SC", "Helvetica Neue", Helvetica, Arial, sans-serif;
+      background-color: #f9f9f9;
+      margin: 0;
+      padding: 2rem 0;
+      color: #5d2a2c;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: center;
+      padding: 0 1.5rem;
+    }
+
+    .title-card-wrapper {
+      background: #ffe6ea;
+      padding: 2rem 0;
+    }
+
+    .title-card {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+      text-align: center;
+    }
+
+    .title-card h1 {
+      margin: 0;
+      font-size: 2rem;
+      font-weight: 700;
+      color: #5d2a2c;
+    }
+
+    .subtitle {
+      margin-top: 1rem;
+      font-size: 1.1rem;
+      line-height: 1.6;
+      color: #5d2a2c;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .subtitle .icon {
+      font-size: 1.4rem;
+    }
+
+    .mermaid {
+      background: transparent;
+      padding: 2rem 0;
+      border-radius: 12px;
+      max-width: 100%;
+      margin: 0 auto;
+      box-shadow: none;
+      border: none;
+      text-align: center;
+    }
+
+    .lightgreenBox rect {
+      fill: #e0e0e0 !important;
+      stroke: none !important;
+      stroke-width: 0 !important;
+      rx: 8px;
+      ry: 8px;
+    }
+  </style>
+</head>
+<body>
+  <div class="title-card-wrapper">
+    <div class="title-card">
+      <h1>胰岛素抵抗机制</h1>
+      <div class="subtitle">
+        <span class="icon">🚨</span>
+        胰岛素作用变差（胰岛素抵抗）→ 血糖高 → 胰岛素更多 → 加重问题
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="mermaid">
+      flowchart TD
+        classDef lightgreenBox fill:#e0e0e0,stroke:none,stroke-width:0,rx:8,ry:8;
+
+        A[🍰 高糖/高糖高热量饮食]:::lightgreenBox --> B[📈 血糖频繁升高]:::lightgreenBox
+        B --> C[🧪 胰岛素分泌增加（长期）]:::lightgreenBox
+        C --> D1[🚫 胰岛素受体减少]:::lightgreenBox
+        C --> D2[📡 信号通路过载]:::lightgreenBox
+        D1 --> E[🔻 胰岛素信号传导下降]:::lightgreenBox
+        D2 --> E
+        E --> F[🚧 GLUT4 调动受阻]:::lightgreenBox
+        F --> G[🔒 糖无法进入细胞]:::lightgreenBox
+    </div>
+  </div>
+</body>
+</html>
