@@ -1,108 +1,151 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="zh-CN">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>胰岛素抵抗机制</title>
+  <title>胰岛素与脂肪代谢的恶性循环</title>
   <script type="module">
     import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
-    mermaid.initialize({
-      startOnLoad: true,
-      themeVariables: {
-        fontFamily: '"PingFang SC", "Helvetica Neue", Helvetica, Arial, sans-serif',
-        fontSize: '20px'
-      }
-    });
+    mermaid.initialize({ startOnLoad: true });
   </script>
   <style>
-    body {
-      font-family: "PingFang SC", "Helvetica Neue", Helvetica, Arial, sans-serif;
-      background-color: #f9f9f9;
-      margin: 0;
-      padding: 0; /* 取消顶部留白 */
-      color: #5d2a2c;
+    * {
+      box-sizing: border-box;
     }
-
-    .container {
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: #fff;
+    }
+    body {
+      font-family: "Helvetica Neue", sans-serif;
       max-width: 800px;
       margin: 0 auto;
-      text-align: center;
-      padding: 0 1.5rem;
+      padding: 0 2rem 2rem 2rem;
+      line-height: 1.6;
+      user-select: none;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
     }
-
     .title-card-wrapper {
-      background: #ffe6ea;
+      background-color: #f5f5f5;
+      width: 100vw;
+      margin-left: calc(-50vw + 50%);
       padding: 2rem 0;
-      margin: 0;
+      border-bottom: 4px solid #3498db;
     }
-
     .title-card {
       max-width: 800px;
       margin: 0 auto;
-      padding: 0 1.5rem;
+      padding: 0 1rem;
       text-align: center;
     }
-
     .title-card h1 {
       margin: 0;
-      font-size: 2rem;
+      color: #2c3e50;
       font-weight: 700;
-      color: #5d2a2c;
+      font-size: 2rem;
     }
-
     .subtitle {
-      margin-top: 1rem;
+      margin-top: 0.75rem;
+      color: #555;
       font-size: 1rem;
-      line-height: 1.6;
-      color: #5d2a2c;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 0.5rem;
-      flex-wrap: wrap;
     }
-
-    .subtitle .icon {
-      font-size: 1.3rem;
+    .description {
+      margin: 1rem auto 2rem auto;
+      max-width: 800px;
+      color: #2c3e50;
+      font-size: 1rem;
+      line-height: 1.5;
+      text-align: left;
     }
-
+    .desc-tagline {
+      text-align: right;
+      font-size: 1rem;
+      font-weight: 500;
+      color: #2c3e50;
+      margin-bottom: 0.5rem;
+    }
     .mermaid {
-      background: transparent;
-      padding: 2rem 0;
-      border-radius: 12px;
-      max-width: 100%;
-      margin: 0 auto;
-      box-shadow: none;
-      border: none;
+      margin: 3rem auto 0;
       text-align: center;
+      font-size: 3rem; /* 放大字体 */
+      max-width: 100%;
     }
+    .explanation {
+      max-width: 800px;
+      margin: 3rem auto 1rem auto;
+      padding: 1rem 1rem 1rem 1.5rem; /* 左侧留出空间给左边框 */
+      background-color: #f5f5f5;
+      border-radius: 8px;
+      color: #2c3e50;
+      font-size: 1rem;
+      line-height: 1.5;
 
-    .lightgreenBox rect {
-      fill: #e0e0e0 !important;
-      stroke: none !important;
-      stroke-width: 0 !important;
-      rx: 8px;
-      ry: 8px;
+      border-left: 4px solid #3498db; /* 左侧蓝色粗线，和标题底边颜色宽度一致 */
+    }
+    .explanation h2 {
+      margin-top: 0;
+      color: #3498db;
+      font-weight: 700;
+    }
+    .explanation h2 {
+      text-align: left;       /* 左对齐 */
+      font-size: 1.25rem;      /* 稍大一些，突出但不夸张 */
+      font-weight: 600;        /* 中等加粗 */
+      color: #2c3e50;          /* 主色调，统一风格 */
+      font-style: normal;      /* 正常字体，不使用斜体 */
+      margin-bottom: 1rem;
+    }
+    .bold {
+      font-weight: 700;
     }
   </style>
+  <script>
+    document.addEventListener('contextmenu', e => e.preventDefault());
+    document.addEventListener('selectstart', e => e.preventDefault());
+    document.addEventListener('copy', e => e.preventDefault());
+    document.addEventListener('keydown', function (e) {
+      if (
+        (e.ctrlKey || e.metaKey) && ['c', 'u', 's', 'p'].includes(e.key.toLowerCase()) || 
+        ['F12', 'PrintScreen'].includes(e.key)
+      ) {
+        e.preventDefault();
+      }
+    });
+    setInterval(() => {
+      const before = new Date();
+      debugger;
+      const after = new Date();
+      if (after - before > 100) {
+        document.body.innerHTML = '<h1 style="text-align:center;color:red;">已检测到调试器，页面已被锁定</h1>';
+      }
+    }, 1000);
+  </script>
 </head>
 <body>
   <div class="title-card-wrapper">
     <div class="title-card">
       <h1>胰岛素抵抗机制</h1>
       <div class="subtitle">
-        <span class="icon">🚨</span>
         胰岛素作用变差（胰岛素抵抗）→ 血糖高 → 胰岛素更多 → 加重问题
       </div>
     </div>
   </div>
 
+  <div class="description">
+    <span class="bold">胰岛素抵抗：</span>身体细胞对胰岛素的响应能力下降，导致葡萄糖无法顺利进入细胞被利用。
+    <br>为了降低血糖，身体分泌更多胰岛素，结果却进一步加重胰岛素抵抗，形成一个恶性循环。<br>
+    该机制可通过下方流程图直观理解：
+  </div>
+
   <div class="container">
     <div class="mermaid">
-      flowchart TD
-        classDef lightgreenBox fill:#e0e0e0,stroke:none,stroke-width:0,rx:8,ry:8;
+flowchart TD
+  classDef lightgreenBox fill:#e0e0e0,stroke:none,stroke-width:0,rx:8,ry:8;
 
-        A[🍰 高糖/高糖高热量饮食]:::lightgreenBox --> B[📈 血糖频繁升高]:::lightgreenBox
+ A[🍰 高糖/高糖高热量饮食]:::lightgreenBox --> B[📈 血糖频繁升高]:::lightgreenBox
         B --> C[🧪 胰岛素分泌增加（长期）]:::lightgreenBox
         C --> D1[🚫 胰岛素受体减少]:::lightgreenBox
         C --> D2[📡 信号通路过载]:::lightgreenBox
@@ -112,5 +155,26 @@
         F --> G[🔒 糖无法进入细胞]:::lightgreenBox
     </div>
   </div>
+
+  <div class="explanation">
+    <h2>总结：胰岛素还在，细胞却已不再听话</h2>
+    <ul>
+      <li>高糖饮食导致血糖频繁升高，胰腺被迫分泌更多胰岛素。</li>
+      <li>长期高胰岛素水平导致胰岛素受体减少和信号通路过载。</li>
+      <li>胰岛素信号传导下降，细胞对葡萄糖摄取受阻。</li>
+      <li>血糖无法有效进入细胞，进一步加重胰岛素抵抗。</li>
+    </ul>
+ 
+   <div class="references">
+  <h3>参考文献</h3>
+  <ul>
+    <li>Petersen, M. C., & Shulman, G. I. Mechanisms of insulin action and insulin resistance. Physiological Reviews, 98(4), 2133–2223.2017</li>
+    <li>DeFronzo, R. A., & Ferrannini, E. Insulin resistance: a multifaceted syndrome responsible for NIDDM, obesity, hypertension, dyslipidemia, and atherosclerotic cardiovascular disease. Diabetes Care, 14(3), 173-194.1991</li>
+    <li>Goldfine, A. B., & Shoelson, S. E. Therapeutic approaches to inflammation and insulin resistance. Journal of Clinical Investigation, 127(1), 11-19.2017</li>
+    <li>Saltiel, A. R., & Kahn, C. R. Insulin signalling and the regulation of glucose and lipid metabolism. Nature, 414(6865), 799-806.2001</li>
+  </ul>
+</div>
+
+
 </body>
 </html>
